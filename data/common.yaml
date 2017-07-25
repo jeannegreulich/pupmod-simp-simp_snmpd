@@ -70,7 +70,7 @@ simp_snmpd::access_hash:
       - readonly_group
       - readwrite_group
   systemwrite:
-    view: 
+    view:
       read: all
       write: systemview
     groups:
@@ -79,8 +79,23 @@ simp_snmpd::access_hash:
 # the snmpd daemon listens on. (IPv6 addresses must
 # be put in [] for now.
 simp_snmpd::agentaddress:
-  - ['udp','127.0.0.1', 161]
-  - ['udp6','[::1]', 161]
+  - [udp, 127.0.0.1, 161]
+  - [udp6, "[::1]", 161]
+simp_snmpd::laddress:
+-
+  specifier: udp
+  address:
+    ip: 127.0.0.1
+-
+  specifier: udp6
+  address:
+    ip: "::1"
+-
+  specifier: upd
+  address:
+    port: 1061
+    ip: ALL
+
 
 # Services/packages to install
 # Whether to install (present) or remove (absent)
@@ -97,6 +112,7 @@ simp_snmpd::trap_service_startatboot: false
 #simp_snmpd::snmp_gid: undef
 #simp_snmpd::snmp_uid: undef
 simp_snmpd::version: 3
+simp_snmpd::snmp_conf_file: /etc/snmp/simp_snmp.conf
 simp_snmpd::simp_snmp_dir: /etc/snmp/simp_snmp.d
 simp_snmpd::simp_snmpd_dir: /etc/snmp/simp_snmpd.d
 simp_snmpd::user_snmp_dir: /etc/snmp/snmp.d
