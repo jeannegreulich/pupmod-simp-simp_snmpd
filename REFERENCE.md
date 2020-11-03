@@ -25,8 +25,9 @@
 
 ### Data types
 
-* [`Simp_snmpd::Auth`](#simp_snmpdauth)
+* [`Simp_snmpd::Seclevel`](#simp_snmpdseclevel): The default authentication level for the client to use in snmp.conf
 * [`Simp_snmpd::Secmodel`](#simp_snmpdsecmodel): type Simp_snmpd::Secmodel = Enum['usm','v1','v2c','tsm','ksm'] Right now usm is the only type suppoerted by this module. If you want to use a
+* [`Simp_snmpd::Vacmlevel`](#simp_snmpdvacmlevel): The default type to use in VACM access directives
 
 ## Classes
 
@@ -405,17 +406,23 @@ Default value: `'AES'`
 
 Data type: `Simp_snmpd::Secmodel`
 
-currently simp_snmpd only supports the usm security model it will support
-tsm  in the future.  This option determins if usm or tsm access is
-configured.
+currently simp_snmpd only supports the usm security model.
 
 Default value: `'usm'`
 
 ##### `defsecuritylevel`
 
-Data type: `Simp_snmpd::Auth`
+Data type: `Simp_snmpd::Seclevel`
 
-The default security level used by the client and to set up usm users.
+The default security level used by the client
+
+Default value: `'authPriv'`
+
+##### `defvacmlevel`
+
+Data type: `Simp_snmpd::Vacmlevel`
+
+The default security level for the VACM access directives.
 
 Default value: `'priv'`
 
@@ -681,11 +688,11 @@ The list of views to create.
 
 ## Data types
 
-### `Simp_snmpd::Auth`
+### `Simp_snmpd::Seclevel`
 
-The Simp_snmpd::Auth data type.
+The default authentication level for the client to use in snmp.conf
 
-Alias of `Enum['noauth', 'auth', 'priv']`
+Alias of `Enum['noAuthNoPriv', 'authNoPriv', 'authPriv']`
 
 ### `Simp_snmpd::Secmodel`
 
@@ -694,4 +701,10 @@ Right now usm is the only type suppoerted by this module.
 If you want to use another type, use the puppet/snmp module directly
 
 Alias of `Enum['usm']`
+
+### `Simp_snmpd::Vacmlevel`
+
+The default type to use in VACM access directives
+
+Alias of `Enum['noauth', 'auth', 'priv']`
 

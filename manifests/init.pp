@@ -124,11 +124,11 @@
 # @param  defprivtype
 #   The default privacy type used for encrypting communication when using usm.
 # @param  defsecuritymodel
-#   currently simp_snmpd only supports the usm security model it will support
-#   tsm  in the future.  This option determins if usm or tsm access is
-#   configured.
+#   currently simp_snmpd only supports the usm security model.
 # @param defsecuritylevel
-#   The default security level used by the client and to set up usm users.
+#   The default security level used by the client
+# @param defvacmlevel
+#   The default security level for the VACM access directives.
 #
 # snmpd.conf system info parameters
 # If the system parameters are set in the snmpd.conf files net-snmp
@@ -166,6 +166,7 @@ class simp_snmpd (
   Hash                           $view_hash,     # See module data
   Hash                           $group_hash,    # See module data
   Hash                           $access_hash,   # See module data
+  String                         $snmpd_options,
   Enum['present','absent']       $ensure                    = 'present',
   Integer                        $version                   = 3,
   Enum['stopped', 'running']     $snmpd_service_ensure      = 'running',
@@ -174,8 +175,7 @@ class simp_snmpd (
   Boolean                        $trap_service_startatboot  = false,
   Boolean                        $manage_client             = false,
   Enum['yes','no']               $do_not_log_tcpwrappers    = 'no',
-  Array[String]                  $agentaddress              = [ 'udp:localhost:161'],
-  String                         $snmpd_options             = '-LS0-66',
+  Array[String]                  $agentaddress              = ['udp:127.0.0.1:161'],
   Optional[String]               $snmptrapd_options         = undef,
   StdLib::AbsolutePath           $snmp_basedir              = '/etc/snmp',
   StdLib::AbsolutePath           $trap_service_config       = "${simp_snmpd::snmp_basedir}/snmptrapd.conf",
@@ -188,7 +188,8 @@ class simp_snmpd (
   Enum['SHA','MD5']              $defauthtype               = 'SHA',
   Enum['DES', 'AES']             $defprivtype               = 'AES',
   Simp_snmpd::Secmodel           $defsecuritymodel          = 'usm',
-  Simp_snmpd::Auth               $defsecuritylevel          = 'priv',
+  Simp_snmpd::Seclevel           $defsecuritylevel          = 'authPriv',
+  Simp_snmpd::Vacmlevel          $defvacmlevel               = 'priv',
   Integer                        $maxgetbulkrepeats         = 100,
   Enum['yes','no']               $leave_pidfile             = 'no',
   Integer                        $maxgetbulkresponses       = 100,

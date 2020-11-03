@@ -41,7 +41,6 @@ describe 'simp_snmpd' do
             :trap_service_enable      => 'false',
             :do_not_log_tcpwrappers   => 'no',
             :manage_client            => 'false',
-            :snmpd_options            => '-LS0-66',
             :snmp_config              => [],
             :views                    => [ 'systemview included .1.3.6.1.2.1.1',
                                            'systemview included .1.3.6.1.2.1.25.1.1',
@@ -128,7 +127,7 @@ describe 'simp_snmpd' do
               :snmp_config   =>  [
                  "defVersion  3",
                  "defSecurityModel usm",
-                 "defSecurityLevel priv",
+                 "defSecurityLevel authPriv",
                  "defAuthType SHA",
                  "defPrivType AES",
                  "mibdirs /usr/share/snmp/mibs:/usr/share/snmp/mibs",

@@ -114,7 +114,7 @@ class simp_snmpd::install {
   # build the usm views, access lists, and groups from the hashes in hiera.
   $_viewlist   = simp_snmpd::viewlist($simp_snmpd::view_hash)
   $_grouplist  = simp_snmpd::grouplist($simp_snmpd::group_hash,$simp_snmpd::defsecuritymodel)
-  $_accesslist = simp_snmpd::accesslist($simp_snmpd::access_hash,$simp_snmpd::defsecuritymodel,$simp_snmpd::defsecuritylevel)
+  $_accesslist = simp_snmpd::accesslist($simp_snmpd::access_hash,$simp_snmpd::defsecuritymodel,$simp_snmpd::defvacmlevel)
 
   # create the users
   class { 'simp_snmpd::install::users' :
